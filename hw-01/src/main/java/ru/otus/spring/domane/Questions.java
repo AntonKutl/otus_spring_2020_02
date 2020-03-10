@@ -2,7 +2,7 @@ package ru.otus.spring.domane;
 
 import java.util.Objects;
 
-public class Questions {
+public final class Questions {
     private String question;
     private String answer;
 

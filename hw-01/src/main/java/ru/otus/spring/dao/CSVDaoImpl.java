@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 public class CSVDaoImpl implements CSVDao {
 
-    private String path;
+    private final String path;
 
     public CSVDaoImpl(String path) {
         this.path = path;
