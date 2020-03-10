@@ -19,7 +19,7 @@ public class CSVDaoImpl implements CSVDao {
         this.path = path;
     }
 
-    public List <Questions> questions() throws IOException {
+    public List<Questions> questions() throws IOException {
         InputStream in = getClass().getResourceAsStream(path);
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
         String line = null;
@@ -44,6 +44,7 @@ public class CSVDaoImpl implements CSVDao {
             index = 0;
             questionsList.add(questions);
         }
+
         reader.close();
         return questionsList;
     }
