@@ -16,19 +16,17 @@ import java.util.Scanner;
 @Service
 public class QuestionsServiceImpl implements QuestionsService {
 
-    @Value("${user.region}")
-    private String local;
-
     private final CSVDao daoCSV;
     private final MessageSource messageSource;
+    private final String local;
     private static String name;
     private static String surname;
     private static int counter = 0;
 
-    @Autowired
-    public QuestionsServiceImpl(CSVDao daoCSV, MessageSource messageSource) {
+    public QuestionsServiceImpl(CSVDao daoCSV, MessageSource messageSource,@Value("${user.region}") String local) {
         this.daoCSV = daoCSV;
         this.messageSource = messageSource;
+        this.local = local;
     }
 
     @Override

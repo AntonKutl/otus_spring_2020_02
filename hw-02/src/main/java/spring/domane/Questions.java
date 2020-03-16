@@ -1,6 +1,6 @@
 package spring.domane;
 
-public final class Questions {
+public class Questions {
     private String question;
     private String answer;
 

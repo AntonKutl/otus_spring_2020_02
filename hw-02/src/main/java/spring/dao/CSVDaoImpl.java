@@ -1,7 +1,6 @@
 package spring.dao;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
@@ -19,16 +18,17 @@ import java.util.Scanner;
 @Service
 public class CSVDaoImpl implements CSVDao {
 
-    @Value("${user.region}")
-    private String local;
-
     private final MessageSource messageSource;
+    private final String local;
 
-    @Autowired
-    public CSVDaoImpl(MessageSource messageSource) {
+
+    public CSVDaoImpl(MessageSource messageSource,@Value("${user.region}") String local) {
         this.messageSource = messageSource;
+        this.local = local;
     }
 
+
+    @Override
     public List<Questions> questions() throws IOException {
         InputStream in = getClass().getResourceAsStream(messageSource.getMessage("question.path",null, Locale.forLanguageTag(local)));
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
