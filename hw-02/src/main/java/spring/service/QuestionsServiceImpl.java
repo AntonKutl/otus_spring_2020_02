@@ -46,7 +46,6 @@ public class QuestionsServiceImpl implements QuestionsService {
                 counter++;
             }
         }
-
         System.out.println(name + " " + surname + messageSource.getMessage("question.answers",new Integer[]{counter}, Locale.forLanguageTag(local)));
     }
 }
