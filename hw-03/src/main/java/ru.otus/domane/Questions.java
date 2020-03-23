@@ -1,6 +1,6 @@
 package ru.otus.domane;
 
-public class Questions {
+public final class Questions {
     private String question;
     private String answer;
 

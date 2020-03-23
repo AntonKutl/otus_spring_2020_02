@@ -21,12 +21,10 @@ public class CSVDaoImpl implements CSVDao {
     private final MessageSource messageSource;
     private  final YamlProps yamlProps;
 
-
     public CSVDaoImpl(MessageSource messageSource, YamlProps yamlProps) {
         this.messageSource = messageSource;
         this.yamlProps = yamlProps;
     }
-
 
     @Override
     public List<Questions> questions() throws IOException {

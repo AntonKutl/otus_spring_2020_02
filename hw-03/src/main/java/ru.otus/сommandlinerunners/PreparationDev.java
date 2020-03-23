@@ -9,7 +9,6 @@ import ru.otus.service.QuestionsService;
 
 import java.io.IOException;
 
-
 @Component
 public class PreparationDev implements CommandLineRunner {
     private static final Logger logger = LoggerFactory.getLogger(PreparationDev.class);
@@ -21,7 +20,6 @@ public class PreparationDev implements CommandLineRunner {
         this.yamlProps = yamlProps;
         this.questionsService = questionsService;
     }
-
 
     @Override
     public void run(String... args) throws IOException {
