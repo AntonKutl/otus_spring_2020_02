@@ -29,8 +29,7 @@ public class BookDAOjdbc implements BookDAO {
         in.addValue("nameAuthor", book.getAuthor());
         in.addValue("nameBook", book.getTitle());
 
-        namedParameterJdbcOperations.update(sql, in)
-        ;
+        namedParameterJdbcOperations.update(sql, in);
     }
 
     @Override
@@ -41,10 +40,9 @@ public class BookDAOjdbc implements BookDAO {
         namedParameterJdbcOperations.update(sql, in);
     }
 
-
     @Override
     public List<Book> getAllBooks() {
-        String sql = "select * from books, authors, genres WHERE genres.id=authors.genresId AND authors.id=books.authorsId";
+        String sql = "select genres.nameGenre,authors.nameAuthor,books.nameBook from books, authors, genres WHERE genres.id=authors.genresId AND authors.id=books.authorsId";
         return namedParameterJdbcOperations.query(sql, new BookMaper());
     }
 
@@ -59,19 +57,15 @@ public class BookDAOjdbc implements BookDAO {
 
     @Override
     public Book viewBook(String nameBook) {
-        String sqlAuthorsId = "select authorsId from books WHERE nameBook=:nameBook";
-        String sqlGenresId = "select genresId from authors WHERE id=:authorsId";
-        String sqlBook = "select * from books, authors, genres WHERE genres.id=:genresId AND authors.id=authorsId AND nameBook=:nameBook";
+        String sqlBook = "select genres.nameGenre,authors.nameAuthor,books.nameBook from books, authors, genres WHERE " +
+                "genres.id=(select genresId from authors WHERE id=(select authorsId from books WHERE nameBook=:nameBook))" +
+                " AND authors.id=(select authorsId from books WHERE nameBook=:nameBook) AND nameBook=:nameBook";
 
         MapSqlParameterSource in = new MapSqlParameterSource();
         in.addValue("nameBook", nameBook);
-        int authorsId = namedParameterJdbcOperations.queryForObject(sqlAuthorsId, in, Integer.class);
-        in.addValue("authorsId", authorsId);
-        int genresId = namedParameterJdbcOperations.queryForObject(sqlGenresId, in, Integer.class);
-        in.addValue("genresId", genresId);
+
         return namedParameterJdbcOperations.queryForObject(sqlBook, in, new BookMaper());
     }
-
 
     private static class BookMaper implements RowMapper<Book> {
 
