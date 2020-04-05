@@ -55,6 +55,7 @@ public class BookDAOjdbc implements BookDAO {
         namedParameterJdbcOperations.update(sql, in);
     }
 
+
     @Override
     public Book viewBook(String nameBook) {
         String sqlBook = "select genres.nameGenre,authors.nameAuthor,books.nameBook from books, authors, genres WHERE " +
