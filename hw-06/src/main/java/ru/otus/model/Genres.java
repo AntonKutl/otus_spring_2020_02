@@ -14,6 +14,7 @@ import java.util.Objects;
 @Table(name = "genres")
 public class Genres {
 
+
     public Genres(String nameGenre) {
         this.nameGenre = nameGenre;
     }

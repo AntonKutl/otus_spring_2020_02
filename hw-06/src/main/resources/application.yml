@@ -5,6 +5,7 @@ spring:
     schema: schema.sql
     data: data.sql
 
+
   banner:
     charset: UTF-8
     location: classpath:banner.txt

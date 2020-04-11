@@ -15,7 +15,6 @@ import ru.otus.model.Genres;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @DisplayName("В классе BookDAOjdbcTest")
 @DataJpaTest
 @Import(BookDAOjdbc.class)

@@ -8,6 +8,7 @@ genres_id INT,
 name_author VARCHAR(50) NOT NULL,
 FOREIGN KEY (genres_id) REFERENCES genres(id));
 
+
 CREATE TABLE books(
 id INT PRIMARY KEY AUTO_INCREMENT,
 authors_id INT REFERENCES authors(id),

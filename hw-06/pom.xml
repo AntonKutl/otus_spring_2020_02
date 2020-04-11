@@ -12,6 +12,7 @@
         <version>2.2.1.RELEASE</version>
     </parent>
 
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
