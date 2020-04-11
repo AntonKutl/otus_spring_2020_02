@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @Data
 @Entity
@@ -23,7 +22,7 @@ public class Genres {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "name_genre",nullable = false)
+    @Column(name = "name_genre", nullable = false)
     private String nameGenre;
 
     @OneToMany(targetEntity = Authors.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)

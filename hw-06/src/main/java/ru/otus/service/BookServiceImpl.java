@@ -65,34 +65,53 @@ public class BookServiceImpl implements BookService {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Введите название книги");
         String nameBook = reader.readLine();
-        System.out.println();
         printBooks(bookDAO.viewBook(nameBook));
     }
 
+    @Override
+    public void addComment() throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Введите название книги");
+        String nameBook = reader.readLine();
+        System.out.println("Введите коментарий к книге");
+        String comment = reader.readLine();
+        bookDAO.addComments(nameBook, comment);
+    }
 
-    private void printСatalogBook(List<Genres> list){
-        for (Genres genres:list) {
-            System.out.println("Жанр:"+genres.getNameGenre());
-            for (Authors authors:genres.getAuthor()) {
-                System.out.println("     Автор:"+authors.getNameAuthor());
-                System.out.print("           Название книг:");
-                for (Books book:authors.getBook()) {
-                    System.out.print("|"+book.getNameBook());
-                    for (Comments comment:book.getComments()) {
-                        System.out.print("|"+comment.getComment());
+    @Override
+    public void viewComments() throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Введите название книги");
+        String nameBook = reader.readLine();
+        System.out.println(bookDAO.viewComment(nameBook));
+    }
+
+
+    private void printСatalogBook(List<Genres> list) {
+        for (Genres genres : list) {
+            System.out.println("Жанр:" + genres.getNameGenre());
+            for (Authors authors : genres.getAuthor()) {
+                System.out.println("|----Автор:" + authors.getNameAuthor());
+                for (Books book : authors.getBook()) {
+                    System.out.println("     |-------Название книги:" + book.getNameBook());
+                    System.out.print("             |--------------Коментарии:");
+                    for (Comments comment : book.getComments()) {
+                        System.out.print(comment.getComment());
                     }
+                    System.out.println();
                 }
-                System.out.println();
+
             }
+            System.out.println();
 
         }
     }
 
-    private void printBooks(List<Book> books){
-        for (Book book:books) {
-            System.out.println("Название книги:"+book.getTitle());
-            System.out.println("Автор книги:"+book.getAuthor());
-            System.out.println("Жанр книги:"+book.getGenre());
+    private void printBooks(List<Book> books) {
+        for (Book book : books) {
+            System.out.println("Название книги:" + book.getTitle());
+            System.out.println("Автор книги:" + book.getAuthor());
+            System.out.println("Жанр книги:" + book.getGenre());
         }
     }
 

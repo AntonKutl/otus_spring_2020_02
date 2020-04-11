@@ -1,7 +1,8 @@
 
-INSERT INTO genres (nameGenre) VALUES ('Роман');
-INSERT INTO authors(genresId, nameAuthor) VALUES (LAST_INSERT_ID(),'Толстой Л.Н');
-INSERT INTO books (authorsId, nameBook) VALUES (LAST_INSERT_ID(), 'Война и мир');
+INSERT INTO genres (name_genre) VALUES ('Роман');
+INSERT INTO authors(genres_id, name_author) VALUES (1,'Толстой Л.Н');
+INSERT INTO books (authors_id, name_book) VALUES (1, 'Война и мир');
+INSERT INTO comments (book_id, value_comment) VALUES (1, 'Самое непонятное задание');
 
 
 

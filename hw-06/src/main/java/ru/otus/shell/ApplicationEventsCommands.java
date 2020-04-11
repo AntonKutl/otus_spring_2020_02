@@ -41,4 +41,14 @@ public class ApplicationEventsCommands {
         bookService.viewBook();
     }
 
+    @ShellMethod(key = {"addComment", "ac"}, value = "Add Comment")
+    public void addComment() throws IOException {
+        bookService.addComment();
+    }
+
+    @ShellMethod(key = {"viewComment", "vc"}, value = "viewComment")
+    public void viewComment() throws IOException {
+        bookService.viewComments();
+    }
+
 }

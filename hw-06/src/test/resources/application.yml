@@ -4,3 +4,7 @@ spring:
     initialization-mode: always
     data: data.sql
 
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none

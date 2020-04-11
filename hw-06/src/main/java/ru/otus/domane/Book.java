@@ -17,6 +17,4 @@ public class Book {
         this.title = title;
         this.genre = genre;
     }
-
-
 }

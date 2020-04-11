@@ -17,4 +17,5 @@ public class Comments {
 
     @Column(name = "value_comment")
     private String comment;
+
 }

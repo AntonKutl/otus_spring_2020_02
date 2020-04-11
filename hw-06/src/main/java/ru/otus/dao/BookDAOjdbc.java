@@ -5,6 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.otus.domane.Book;
 import ru.otus.model.Authors;
 import ru.otus.model.Books;
+import ru.otus.model.Comments;
 import ru.otus.model.Genres;
 
 import javax.persistence.EntityManager;
@@ -23,10 +24,10 @@ public class BookDAOjdbc implements BookDAO {
     @Override
     public void addBook(Book book) {
         Genres genres = new Genres(book.getGenre());
-        Authors authors =new Authors(book.getAuthor());
-        Books books=new Books(book.getTitle());
+        Authors authors = new Authors(book.getAuthor());
+        Books books = new Books(book.getTitle());
 
-        List <Books> listBook =new ArrayList<>();
+        List<Books> listBook = new ArrayList<>();
         List<Authors> listAuthors = new ArrayList<>();
 
         listBook.add(books);
@@ -37,19 +38,19 @@ public class BookDAOjdbc implements BookDAO {
 
         Query query = em.createQuery("SELECT g FROM Genres g WHERE g.nameGenre=:nameGenre");
         query.setParameter("nameGenre", book.getGenre());
-        List<Genres> genresList= query.getResultList();
+        List<Genres> genresList = query.getResultList();
 
         if (genresList.size() == 0) {
             em.persist(genres);
-        }else {
-            genres=genresList.get(0);
-            listAuthors=genres.getAuthor();
+        } else {
+            genres = genresList.get(0);
+            listAuthors = genres.getAuthor();
 
-            if (!listAuthors.contains(authors)){
+            if (!listAuthors.contains(authors)) {
                 listAuthors.add(authors);
-            }else {
-                authors=listAuthors.get(listAuthors.indexOf(new Authors(book.getAuthor())));
-                listBook=authors.getBook();
+            } else {
+                authors = listAuthors.get(listAuthors.indexOf(new Authors(book.getAuthor())));
+                listBook = authors.getBook();
                 listBook.add(new Books(book.getTitle()));
             }
 
@@ -89,4 +90,23 @@ public class BookDAOjdbc implements BookDAO {
         return query.getResultList();
     }
 
+    @Override
+    public void addComments(String nameBook, String comment) {
+        Query query = em.createQuery("SELECT b FROM Books b WHERE b.nameBook=:nameBook");
+        query.setParameter("nameBook", nameBook);
+        List<Books> book = query.getResultList();
+        Comments commentBook = new Comments();
+        commentBook.setComment(comment);
+        book.get(0).getComments().add(commentBook);
+    }
+
+    @Override
+    public List<Comments> viewComment(String nameBook) {
+        Query query = em.createQuery("SELECT b.comments FROM Books b WHERE b.nameBook=:nameBook");
+        query.setParameter("nameBook", nameBook);
+        return query.getResultList();
+    }
+
 }
+
+

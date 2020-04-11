@@ -12,4 +12,8 @@ public interface BookService {
     void editingBook() throws IOException;
 
     void viewBook() throws IOException;
+
+    void addComment() throws IOException;
+
+    void viewComments() throws IOException;
 }

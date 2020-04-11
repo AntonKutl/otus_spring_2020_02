@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @Data
 @Entity
@@ -22,7 +21,7 @@ public class Books {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "name_book",nullable = false)
+    @Column(name = "name_book", nullable = false)
     private String nameBook;
 
     @OneToMany(targetEntity = Comments.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)

@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @Data
 @Entity
@@ -22,7 +21,7 @@ public class Authors {
         this.nameAuthor = nameAuthor;
     }
 
-    @Column(name = "name_author",nullable = false)
+    @Column(name = "name_author", nullable = false)
     private String nameAuthor;
 
     @OneToMany(targetEntity = Books.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
