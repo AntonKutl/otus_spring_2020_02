@@ -15,8 +15,4 @@ public interface BookDAO {
     void editingBook(long id, String newNameBook);
 
     Book viewBook(String nameBook);
-
-
-
-
 }
