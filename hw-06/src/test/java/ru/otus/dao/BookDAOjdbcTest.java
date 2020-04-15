@@ -7,10 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.Import;
-import ru.otus.domane.Book;
-import ru.otus.model.Authors;
-import ru.otus.model.Books;
-import ru.otus.model.Genres;
+import ru.otus.model.Book;
+import ru.otus.model.Comment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,53 +25,46 @@ class BookDAOjdbcTest {
     @Autowired
     private TestEntityManager em;
 
-
-    @Test
-    @DisplayName("метод addBook() должен добавлять книгу ")
-    void addBook() {
-        Book book = new Book("Антон", "Код", "Java");
-        bookDAOjdbc.addBook(book);
-        bookDAOjdbc.viewBook("Код").get(0);
-        Assert.assertEquals(book, bookDAOjdbc.viewBook("Код").get(0));
-    }
-
-    @Test
-    @DisplayName("метод deleteBook() должен удалять книгу ")
-    void deleteBook() {
-        Book book = new Book("Антон", "Код", "Java");
-        bookDAOjdbc.addBook(book);
-        bookDAOjdbc.deleteBook("Код");
-        Assert.assertNotEquals(book, bookDAOjdbc.viewBook("Код").get(0));
-    }
-
     @Test
     @DisplayName("метод getAllBooks() должен возвращать все книги")
     void getAllBooks() {
-        Genres genres = new Genres("Роман");
-        Authors authors =new Authors("Толстой Л.Н");
-        Books books=new Books("Война и мир");
+        List <Book> listBook =new ArrayList<>();
+        Book book1=new Book();
+        book1.setId(1);
+        book1.setAuthorsID(1);
+        book1.setNameBook("Война и мир");
+        book1.setComments(new ArrayList<Comment>());
+        Book book2=new Book();
+        book2.setId(2);
+        book2.setAuthorsID(1);
+        book2.setNameBook("Семейное счастье");
+        book2.setComments(new ArrayList<Comment>());
+        listBook.add(book1);
+        listBook.add(book2);
 
-        List <Books> listBook =new ArrayList<>();
-        listBook.add(books);
-        List<Authors> listAuthors = new ArrayList<>();
-        listAuthors.add(authors);
-        genres.setAuthor(listAuthors);
-
-        Assert.assertEquals(genres, bookDAOjdbc.getAllBooks().get(0));
+        Assert.assertEquals(listBook, bookDAOjdbc.getAllBooks());
     }
 
     @Test
     @DisplayName("метод editingBook() должен редактировать книгу")
     void editingBook() {
-        Book book = new Book("Толстой Л.Н", "Море", "Роман");
-        bookDAOjdbc.editingBook("Война и мир", "Море");
-        Assert.assertEquals(book, bookDAOjdbc.viewBook("Море").get(0));
+        Book book1=new Book();
+        book1.setId(1);
+        book1.setAuthorsID(1);
+        book1.setNameBook("Море");
+        book1.setComments(new ArrayList<Comment>());
+        bookDAOjdbc.editingBook(1, "Море");
+        Assert.assertEquals(book1, bookDAOjdbc.viewBook("Море"));
     }
 
     @Test
     @DisplayName("метод viewBook() должен показывать книгу")
     void viewBook() {
-        Book book = new Book("Толстой Л.Н", "Война и мир", "Роман");
-        Assert.assertEquals(book, bookDAOjdbc.viewBook("Война и мир").get(0));
+        Book book1=new Book();
+        book1.setId(1);
+        book1.setAuthorsID(1);
+        book1.setNameBook("Война и мир");
+        book1.setComments(new ArrayList<Comment>());
+        Assert.assertEquals(book1, bookDAOjdbc.viewBook("Война и мир"));
     }
 }

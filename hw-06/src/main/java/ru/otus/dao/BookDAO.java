@@ -1,8 +1,6 @@
 package ru.otus.dao;
 
-import ru.otus.domane.Book;
-import ru.otus.model.Comments;
-import ru.otus.model.Genres;
+import ru.otus.model.Book;
 
 import java.util.List;
 
@@ -10,17 +8,15 @@ public interface BookDAO {
 
     void addBook(Book book);
 
-    void deleteBook(String nameBook);
+    void deleteById(long id);
 
-    List<Genres> getAllBooks();
+    List<Book> getAllBooks();
 
-    void editingBook(String nameBook, String book);
+    void editingBook(long id, String newNameBook);
 
-    List<Book> viewBook(String nameBook);
+    Book viewBook(String nameBook);
 
-    void addComments(String nameBook, String comment);
 
-    List<Comments> viewComment(String nameBook);
 
 
 }

@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Entity
 @NoArgsConstructor
 @Table(name = "comments")
-public class Comments {
+public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,5 +17,8 @@ public class Comments {
 
     @Column(name = "value_comment")
     private String comment;
+
+    @Column(name = "book_id")
+    private long bookId;
 
 }
