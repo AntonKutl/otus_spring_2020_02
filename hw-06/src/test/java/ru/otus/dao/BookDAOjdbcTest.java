@@ -28,12 +28,18 @@ class BookDAOjdbcTest {
     @Test
     @DisplayName("метод getAllBooks() должен возвращать все книги")
     void getAllBooks() {
+        Comment comment=new Comment();
+        comment.setId(1);
+        comment.setBookId(1);
+        comment.setComment("Самое непонятное задание");
+        List <Comment> listComment=new ArrayList<>();
+        listComment.add(comment);
         List <Book> listBook =new ArrayList<>();
         Book book1=new Book();
         book1.setId(1);
         book1.setAuthorsID(1);
         book1.setNameBook("Война и мир");
-        book1.setComments(new ArrayList<Comment>());
+        book1.setComments(listComment);
         Book book2=new Book();
         book2.setId(2);
         book2.setAuthorsID(1);
@@ -48,11 +54,17 @@ class BookDAOjdbcTest {
     @Test
     @DisplayName("метод editingBook() должен редактировать книгу")
     void editingBook() {
+        Comment comment=new Comment();
+        comment.setId(1);
+        comment.setBookId(1);
+        comment.setComment("Самое непонятное задание");
+        List <Comment> listComment=new ArrayList<>();
+        listComment.add(comment);
         Book book1=new Book();
         book1.setId(1);
         book1.setAuthorsID(1);
         book1.setNameBook("Море");
-        book1.setComments(new ArrayList<Comment>());
+        book1.setComments(listComment);
         bookDAOjdbc.editingBook(1, "Море");
         Assert.assertEquals(book1, bookDAOjdbc.viewBook("Море"));
     }
@@ -60,11 +72,17 @@ class BookDAOjdbcTest {
     @Test
     @DisplayName("метод viewBook() должен показывать книгу")
     void viewBook() {
+        Comment comment=new Comment();
+        comment.setId(1);
+        comment.setBookId(1);
+        comment.setComment("Самое непонятное задание");
+        List <Comment> listComment=new ArrayList<>();
+        listComment.add(comment);
         Book book1=new Book();
         book1.setId(1);
         book1.setAuthorsID(1);
         book1.setNameBook("Война и мир");
-        book1.setComments(new ArrayList<Comment>());
+        book1.setComments(listComment);
         Assert.assertEquals(book1, bookDAOjdbc.viewBook("Война и мир"));
     }
 }

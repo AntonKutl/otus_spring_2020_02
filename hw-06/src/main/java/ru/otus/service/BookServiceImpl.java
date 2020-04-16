@@ -78,9 +78,11 @@ public class BookServiceImpl implements BookService {
     @Override
     public void viewComments() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Введите ID книги");
-        long id = Long.valueOf(reader.readLine());
-        printComment(commentDAO.viewComment(id));
+        System.out.println("Введите название книги");
+        String nameBook = reader.readLine();
+        Book book=bookDAO.viewBook(nameBook);
+        printComment(book.getComments());
+        //printComment(commentDAO.viewComment(id));
     }
 
     private void printListBook(List<Book> listBook){

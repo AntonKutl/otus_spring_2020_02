@@ -6,10 +6,7 @@ import ru.otus.model.Comment;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import java.util.List;
 
-@Transactional
 @Repository
 public class CommentDAOImpl implements CommentDAO {
 
@@ -17,14 +14,8 @@ public class CommentDAOImpl implements CommentDAO {
     private EntityManager em;
 
     @Override
+    @Transactional
     public void addComments(Comment comment) {
         em.persist(comment);
-    }
-
-    @Override
-    public List<Comment> viewComment(long id) {
-        Query query = em.createQuery("SELECT b.comments FROM Book b WHERE b.id=:id");
-        query.setParameter("id", id);
-        return query.getResultList();
     }
 }
