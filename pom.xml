@@ -21,6 +21,7 @@
         <module>hw-03</module>
         <module>hw-04</module>
         <module>hw-06</module>
+        <module>hw-07</module>
     </modules>
     <properties>
         <maven.compiler.target>11</maven.compiler.target>
