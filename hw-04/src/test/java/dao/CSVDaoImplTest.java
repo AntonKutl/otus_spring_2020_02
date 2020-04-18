@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import ru.otus.dao.CSVDao;
-import ru.otus.domane.Questions;
+import ru.otus.model.Questions;
 import ru.otus.service.QuestionsService;
 
 import java.io.IOException;

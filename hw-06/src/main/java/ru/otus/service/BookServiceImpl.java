@@ -1,26 +1,28 @@
 package ru.otus.service;
 
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.stereotype.Service;
 import ru.otus.dao.BookDAO;
-import ru.otus.domane.Book;
-import ru.otus.model.Authors;
-import ru.otus.model.Books;
-import ru.otus.model.Comments;
-import ru.otus.model.Genres;
+
+
+import ru.otus.dao.CommentDAO;
+import ru.otus.model.Book;
+import ru.otus.model.Comment;
+
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
 
-@SpringBootApplication
+@Service
 public class BookServiceImpl implements BookService {
 
-
     private final BookDAO bookDAO;
+    private final CommentDAO commentDAO;
 
-    public BookServiceImpl(BookDAO bookDAO) {
+    public BookServiceImpl(BookDAO bookDAO, CommentDAO commentDAO) {
         this.bookDAO = bookDAO;
+        this.commentDAO = commentDAO;
     }
 
     @Override
@@ -28,37 +30,33 @@ public class BookServiceImpl implements BookService {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         Book book = new Book();
         System.out.println("Введите название книги");
-        book.setTitle(reader.readLine());
-        System.out.println("Введите жанр книги");
-        book.setGenre(reader.readLine());
-        System.out.println("Введите автора книги");
-        book.setAuthor(reader.readLine());
+        book.setNameBook(reader.readLine());
+        System.out.println("Введите ID автора");
+        book.setAuthorsID(Long.valueOf(reader.readLine()));
         bookDAO.addBook(book);
     }
 
     @Override
     public void viewAllBooks() {
-        printСatalogBook(bookDAO.getAllBooks());
+        printListBook(bookDAO.getAllBooks());
     }
 
     @Override
     public void deleteBook() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Введите название удаляемой книги");
-        String nameBook = reader.readLine();
-        bookDAO.deleteBook(nameBook);
+        System.out.println("Введите ID удаляемой книги");
+        long id = Long.valueOf(reader.readLine());
+        bookDAO.deleteById(id);
     }
 
     @Override
     public void editingBook() throws IOException {
-
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Введите название редактируемой книги");
-        String oldNameBook = reader.readLine();
+        System.out.println("Введите ID редактируемой книги");
+        long id = Long.valueOf(reader.readLine());
         System.out.println("Введите новое название книги");
         String nameBook = reader.readLine();
-
-        bookDAO.editingBook(oldNameBook, nameBook);
+        bookDAO.editingBook(id, nameBook);
     }
 
     @Override
@@ -66,17 +64,18 @@ public class BookServiceImpl implements BookService {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Введите название книги");
         String nameBook = reader.readLine();
-        printBooks(bookDAO.viewBook(nameBook));
+        printBook(bookDAO.viewBook(nameBook));
     }
 
     @Override
     public void addComment() throws IOException {
+        Comment comment=new Comment();
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Введите название книги");
-        String nameBook = reader.readLine();
+        System.out.println("Введите ID книги");
+        comment.setBookId(Long.valueOf(reader.readLine()));
         System.out.println("Введите коментарий к книге");
-        String comment = reader.readLine();
-        bookDAO.addComments(nameBook, comment);
+        comment.setComment(reader.readLine());
+        commentDAO.addComments(comment);
     }
 
     @Override
@@ -84,37 +83,28 @@ public class BookServiceImpl implements BookService {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Введите название книги");
         String nameBook = reader.readLine();
-        System.out.println(bookDAO.viewComment(nameBook));
+        Book book=bookDAO.viewBook(nameBook);
+        printComment(book.getComments());
+        //printComment(commentDAO.viewComment(id));
     }
 
-
-    private void printСatalogBook(List<Genres> list) {
-        for (Genres genres : list) {
-            System.out.println("Жанр:" + genres.getNameGenre());
-            for (Authors authors : genres.getAuthor()) {
-                System.out.println("|----Автор:" + authors.getNameAuthor());
-                for (Books book : authors.getBook()) {
-                    System.out.println("     |-------Название книги:" + book.getNameBook());
-                    System.out.print("             |--------------Коментарии:");
-                    for (Comments comment : book.getComments()) {
-                        System.out.print(comment.getComment());
-                    }
-                    System.out.println();
-                }
-
-            }
-            System.out.println();
-
+    private void printListBook(List<Book> listBook){
+        System.out.println("ID     Название книги");
+        for (Book book:listBook) {
+            System.out.println(book.getId()+"      "+book.getNameBook());
         }
     }
 
-    private void printBooks(List<Book> books) {
-        for (Book book : books) {
-            System.out.println("Название книги:" + book.getTitle());
-            System.out.println("Автор книги:" + book.getAuthor());
-            System.out.println("Жанр книги:" + book.getGenre());
-        }
+    private void printBook(Book book){
+        System.out.println("ID     Название книги");
+        System.out.println(book.getId()+"      "+book.getNameBook());
     }
 
+    private void printComment(List<Comment> listComment){
+        System.out.println("ID     Коментарии");
+        for (Comment comment:listComment) {
+            System.out.println(comment.getId()+"      "+comment.getComment());
+        }
+    }
 
 }

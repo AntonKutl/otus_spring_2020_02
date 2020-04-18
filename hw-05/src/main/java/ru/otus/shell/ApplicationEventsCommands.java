@@ -3,8 +3,6 @@ package ru.otus.shell;
 
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
-import ru.otus.dao.BookDAO;
-import ru.otus.domane.Book;
 import ru.otus.service.BookService;
 
 import java.io.IOException;

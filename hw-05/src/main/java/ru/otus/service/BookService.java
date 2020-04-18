@@ -1,7 +1,5 @@
 package ru.otus.service;
 
-import ru.otus.domane.Book;
-
 import java.io.IOException;
 
 public interface BookService {

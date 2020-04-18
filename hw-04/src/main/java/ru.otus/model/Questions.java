@@ -1,4 +1,4 @@
-package ru.otus.domane;
+package ru.otus.model;
 
 public final class Questions {
     private String question;

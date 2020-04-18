@@ -4,7 +4,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 import ru.otus.configs.YamlProps;
 import ru.otus.dao.CSVDao;
-import ru.otus.domane.Questions;
+import ru.otus.model.Questions;
 
 import java.io.BufferedReader;
 import java.io.IOException;

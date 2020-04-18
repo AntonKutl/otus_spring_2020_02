@@ -4,14 +4,13 @@ import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 import ru.otus.configs.YamlProps;
 import ru.otus.dao.CSVDao;
-import ru.otus.domane.Questions;
+import ru.otus.model.Questions;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Locale;
-import java.util.Scanner;
 
 @Service
 public class QuestionsServiceImpl implements QuestionsService {

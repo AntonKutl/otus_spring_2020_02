@@ -2,7 +2,7 @@ package ru.otus.service;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import ru.otus.dao.BookDAO;
-import ru.otus.domane.Book;
+import ru.otus.model.Book;
 
 import java.io.BufferedReader;
 import java.io.IOException;

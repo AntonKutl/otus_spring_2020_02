@@ -1,4 +1,4 @@
-package ru.otus.domane;
+package ru.otus.model;
 
 import java.util.Objects;
 
