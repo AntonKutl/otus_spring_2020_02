@@ -7,11 +7,11 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @NoArgsConstructor
-
 @Document(collection = "books")
 public class Book {
 
@@ -24,15 +24,15 @@ public class Book {
     @Id
     private String id;
 
-    @Field
+    @Field (name = "name_book")
     private String nameBook;
 
-    @Field
+    @Field(name = "author")
     private String author;
 
-    @Field
+    @Field(name = "genre")
     private String genre;
 
-    @DBRef
-    private List<Comment> comments;
+    @DBRef(lazy = true)
+    private List<Comment> comments=new ArrayList<>();
 }

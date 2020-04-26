@@ -6,7 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.otus.dao.BookRepository;
 import ru.otus.dao.CommentRepository;
 import ru.otus.model.Book;
-import ru.otus.model.Comment;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -74,11 +73,11 @@ public class BookServiceImpl implements BookService {
 
     private void printListBook(List<Book> listBook){
         for (Book book:listBook) {
-            System.out.println("Id:"+book.getId()+" ,NameBook: "+book.getNameBook()+" ,NameAuthor: "+book.getAuthor()+" ,Genre: "+book.getGenre());
+            System.out.println(book);
         }
     }
 
     private void printBook(Book book){
-        System.out.println("Id:"+book.getId()+" ,NameBook: "+book.getNameBook()+" ,NameAuthor: "+book.getAuthor()+" ,Genre: "+book.getGenre());
+        System.out.println(book);
     }
 }
