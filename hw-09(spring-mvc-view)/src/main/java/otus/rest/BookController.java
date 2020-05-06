@@ -27,11 +27,7 @@ public class BookController {
 
     @GetMapping("/")
     public String listPage(Model model) {
-        List<Book> books = bookRepository.findAll();
-        List<Author> authors=authorRepository.findAll();
-        model.addAttribute("books", books);
-        model.addAttribute("authors",authors);
-        return "list";
+        return viewListBook(model);
     }
 
     @GetMapping("/edit")
@@ -44,26 +40,27 @@ public class BookController {
     @PostMapping("/edit")
     public String editBook(Book book, Model model) {
         bookRepository.save(book);
-        List<Book> books = bookRepository.findAll();
-        model.addAttribute("books", books);
-        return "list";
+        return viewListBook(model);
     }
 
     @GetMapping("/delete")
     public String deletePage(@RequestParam("id") long id, Model model) {
         bookRepository.deleteById(id);
-        List<Book> books = bookRepository.findAll();
-        model.addAttribute("books", books);
-        return "list";
+        return viewListBook(model);
     }
 
     @PostMapping("/save")
     public String savePerson(Book book, Model model) {
         bookRepository.save(book);
+        return viewListBook(model);
+    }
+
+    private String viewListBook(Model model){
         List<Book> books = bookRepository.findAll();
         List<Author> authors=authorRepository.findAll();
         model.addAttribute("books", books);
         model.addAttribute("authors",authors);
         return "list";
     }
+
 }
