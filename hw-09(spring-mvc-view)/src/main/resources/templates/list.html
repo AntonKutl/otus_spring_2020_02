@@ -60,9 +60,18 @@
     </div>
 
     <div class="row">
-        <label for="authorsID-input">ID Author:</label>
-        <input id="authorsID-input" name="authorsID" type="number" th:value="${AuthorsID}" value="1"/>
+        <label for="authorsID-input">Name Author:</label>
+
+        <select id="authorsID-input" name="authorsID">
+            <option value="0">select Author</option>
+            <option th:each="author : ${authors}" th:value="${author.id}" th:text="${author.nameAuthor}">
+                John Doe
+            </option>
+        </select>
     </div>
+
+
+
 
     <div class="row">
         <button type="submit">Save</button>

@@ -6,7 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import otus.dao.AuthorRepository;
 import otus.dao.BookRepository;
+import otus.model.Author;
 import otus.model.Book;
 
 import java.util.List;
@@ -15,16 +17,20 @@ import java.util.List;
 public class BookController {
 
     private final BookRepository bookRepository;
+    private final AuthorRepository authorRepository;
 
     @Autowired
-    public BookController(BookRepository bookRepository) {
+    public BookController(BookRepository bookRepository, AuthorRepository authorRepository) {
         this.bookRepository = bookRepository;
+        this.authorRepository = authorRepository;
     }
 
     @GetMapping("/")
     public String listPage(Model model) {
         List<Book> books = bookRepository.findAll();
+        List<Author> authors=authorRepository.findAll();
         model.addAttribute("books", books);
+        model.addAttribute("authors",authors);
         return "list";
     }
 
@@ -37,7 +43,7 @@ public class BookController {
     
     @PostMapping("/edit")
     public String editBook(Book book, Model model) {
-        Book saved = bookRepository.save(book);
+        bookRepository.save(book);
         List<Book> books = bookRepository.findAll();
         model.addAttribute("books", books);
         return "list";
@@ -53,9 +59,11 @@ public class BookController {
 
     @PostMapping("/save")
     public String savePerson(Book book, Model model) {
-        Book saved = bookRepository.save(book);
+        bookRepository.save(book);
         List<Book> books = bookRepository.findAll();
+        List<Author> authors=authorRepository.findAll();
         model.addAttribute("books", books);
+        model.addAttribute("authors",authors);
         return "list";
     }
 }

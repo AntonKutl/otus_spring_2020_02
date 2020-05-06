@@ -6,5 +6,4 @@ import otus.model.Book;
 public interface BookRepository extends JpaRepository <Book, Long> {
 
     Book findByNameBook(String nameBook);
-
 }
