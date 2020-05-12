@@ -1,6 +1,7 @@
 package ru.otus.spring.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -31,6 +32,13 @@ public class BookController {
     @DeleteMapping ("/api/books/{id}")
     public void delete(@PathVariable(name = "id") long id){
         bookRepository.deleteById(id);
+    }
+
+    @PostMapping(value = "/api/book")
+    public ResponseEntity<?> save(@RequestBody Book book) {
+        System.out.println("====");
+        bookRepository.save(book);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
 

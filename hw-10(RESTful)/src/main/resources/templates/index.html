@@ -13,6 +13,9 @@
             border: 1px solid lightgray;
             padding: 5px;
         }
+
+
+
     </style>
     <script src="webjars/jquery/3.3.1/jquery.min.js"></script>
 </head>
@@ -31,6 +34,31 @@
     <tbody>
     </tbody>
 </table>
+
+<form id="save-form" method="post">
+    <h1>Save new book:</h1>
+<div id="dialog1" class="window">
+    <div class="row">
+        <label for="name">Name book:</label>
+        <input id="name" name="nameBook" type="text" value="John Doe"/>
+    </div>
+
+    <div class="row">
+        <label for="authorsID-input">Name Author:</label>
+
+        <select id="authorsID-input" name="authorsID">
+            <option value="0">select Author</option>
+            <option>
+                John Doe
+            </option>
+        </select>
+    </div>
+    <div class="row">
+        <button id="create-user" type="submit">Save</button>
+    </div>
+</div>
+</form>
+
 
 
 
@@ -53,15 +81,30 @@
     $( "tbody" ).on('click','button',function() {
        if ($(this).attr('id')=='delete'){
        $.ajax({
-              url: '/api/books/'+ $(this).val(),
-              type: 'DELETE',
+          url: '/api/books/'+ $(this).val(),
+          type: 'DELETE',
        });
        }else{
+       alert()
        }
        location.reload();
     });
 
+    $( "#create-user" ).on( "click", function() {
+    var settings = {
+  "url": "/api/book",
+  "method": "POST",
+  "timeout": 0,
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "data": JSON.stringify({"nameBook":"Война и мир","authorsID":1,"comments":[]}),
+};
 
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});
+    })
 </script>
 </body>
 </html>
