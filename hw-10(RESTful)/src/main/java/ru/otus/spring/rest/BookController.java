@@ -29,6 +29,11 @@ public class BookController {
         return bookRepository.findAll();
     }
 
+    @GetMapping("/api/authors")
+    public List<Author> getAllAuthors() {
+        return authorRepository.findAll();
+    }
+
     @DeleteMapping ("/api/books/{id}")
     public void delete(@PathVariable(name = "id") long id){
         bookRepository.deleteById(id);
@@ -40,43 +45,4 @@ public class BookController {
         bookRepository.save(book);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
-
-
-
-
-
-
-    /*@GetMapping("/edit")
-    public String editPage(@RequestParam("id") long id, Model model) {
-        Book book = bookRepository.findById(id).orElseThrow(NotFoundException::new);
-        model.addAttribute("book", book);
-        return "edit";
-    }
-    
-    @PostMapping("/edit")
-    public String editBook(Book book, Model model) {
-        bookRepository.save(book);
-        return viewListBook(model);
-    }
-
-    @GetMapping("/delete")
-    public String deletePage(@RequestParam("id") long id, Model model) {
-        bookRepository.deleteById(id);
-        return viewListBook(model);
-    }
-
-    @PostMapping("/save")
-    public String savePerson(Book book, Model model) {
-        bookRepository.save(book);
-        return viewListBook(model);
-    }
-
-    private String viewListBook(Model model){
-        List<Book> books = bookRepository.findAll();
-        List<Author> authors=authorRepository.findAll();
-        model.addAttribute("books", books);
-        model.addAttribute("authors",authors);
-        return "list";
-    }
-*/
 }
