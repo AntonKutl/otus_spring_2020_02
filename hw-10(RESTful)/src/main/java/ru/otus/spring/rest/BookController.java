@@ -3,7 +3,6 @@ package ru.otus.spring.rest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.otus.spring.dao.AuthorRepository;
 import ru.otus.spring.dao.BookRepository;
@@ -11,6 +10,7 @@ import ru.otus.spring.model.Author;
 import ru.otus.spring.model.Book;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class BookController {
@@ -41,8 +41,15 @@ public class BookController {
 
     @PostMapping(value = "/api/book")
     public ResponseEntity<?> save(@RequestBody Book book) {
-        System.out.println("====");
         bookRepository.save(book);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
+
+    @PutMapping("/api/books/{id}")
+    public void edit(@PathVariable(name = "id") long id, @RequestBody String nameBook) {
+        Optional<Book> bookOptional=bookRepository.findById(id);
+        Book book=bookOptional.get();
+        book.setNameBook(nameBook);
+    }
+
 }
