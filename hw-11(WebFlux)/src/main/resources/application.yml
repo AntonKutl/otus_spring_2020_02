@@ -1,0 +1,13 @@
+spring:
+  data:
+    mongodb:
+      database: library
+
+
+jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+server:
+    port: 8090
