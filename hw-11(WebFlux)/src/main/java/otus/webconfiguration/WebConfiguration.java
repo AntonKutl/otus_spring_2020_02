@@ -16,6 +16,6 @@ import static org.springframework.web.reactive.function.server.ServerResponse.ok
 class WebConfiguration {
 
     @Bean
-    public RouterFunction<ServerResponse> htmlRouter(@Value("classpath:/templates/index.html") Resource html)
+    public RouterFunction<ServerResponse> htmlRouter(@Value("classpath:/static/index.html") Resource html)
     { return route(GET("/"), request -> ok().contentType(MediaType.TEXT_HTML).syncBody(html));}
 }

@@ -36,24 +36,11 @@ public class BookController {
         return bookRepository.save(book);
     }
 
-   /* @GetMapping("/api/authors")
-    public List<Author> getAllAuthors() {
-        return authorRepository.findAll();
-    }
-
-
-
-    @PostMapping(value = "/api/book")
-    public ResponseEntity<?> save(@RequestBody Book book) {
-        bookRepository.save(book);
-        return new ResponseEntity<>(HttpStatus.CREATED);
-    }
-
     @PutMapping("/api/books/{id}")
-    public void edit(@PathVariable(name = "id") long id, @RequestBody String nameBook) {
-        Optional<Book> bookOptional=bookRepository.findById(id);
-        Book book=bookOptional.get();
+    public Mono<Book> edit(@PathVariable(name = "id") String id, @RequestBody String nameBook) {
+        Mono<Book> bookMono=bookRepository.findById(id);
+        Book book=bookMono.block();
         book.setNameBook(nameBook);
-    }*/
-
+        return null;
+    }
 }

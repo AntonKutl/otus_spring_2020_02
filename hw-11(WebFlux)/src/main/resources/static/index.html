@@ -8,7 +8,7 @@
         body {
             padding: 50px;
         }
-        .persons, .persons td {
+        .books, .books td {
             border: 1px solid lightgray;
             padding: 5px;
         }
@@ -19,7 +19,7 @@
 <body>
 <h1>Books:</h1>
 
-<table class="persons">
+<table class="books">
     <thead>
     <tr>
         <th>Book title</th>
@@ -36,6 +36,7 @@
 
 <h1>Save new book:</h1>
 <div id="dialog1" class="window">
+
     <div class="row">
         <label>Name book:</label>
         <input id="name" type="text"/>
@@ -82,7 +83,8 @@
           type: 'DELETE',
        });
        }else{
-       alert()
+
+       window.location = 'classpath:/static/edit.htm'
        }
        location.reload();
     });
