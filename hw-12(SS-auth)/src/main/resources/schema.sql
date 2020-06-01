@@ -1,0 +1,32 @@
+CREATE TABLE genres(
+id INT PRIMARY KEY AUTO_INCREMENT,
+  name_genre VARCHAR(50) NOT NULL);
+
+CREATE TABLE authors(
+id INT PRIMARY KEY AUTO_INCREMENT,
+genres_id INT,
+name_author VARCHAR(50) NOT NULL,
+FOREIGN KEY (genres_id) REFERENCES genres(id));
+
+
+CREATE TABLE books(
+id INT PRIMARY KEY AUTO_INCREMENT,
+authors_id INT REFERENCES authors(id),
+name_book VARCHAR(50) NOT NULL);
+
+CREATE TABLE comments(
+id INT PRIMARY KEY AUTO_INCREMENT,
+book_id INT,
+value_comment VARCHAR(200),
+FOREIGN KEY (book_id) REFERENCES books(id));
+
+CREATE TABLE usertable(
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  name_user VARCHAR(50) NOT NULL,
+  password_user VARCHAR(50) NOT NULL);
+
+CREATE TABLE userroles(
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  user_id INT,
+  name_role VARCHAR(50) NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES usertable(id));
