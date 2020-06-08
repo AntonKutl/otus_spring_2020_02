@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>List of all books</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        label {
+            display: inline-block;
+            width: 100px;
+        }
+
+        input:read-only {
+            background: lightgray;
+        }
+
+        .row {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<h1>Books:</h1>
+
+<table class="books">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>authorsID</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="book : ${books}">
+        <td th:text="${book.id}">1</td>
+        <td th:text="${book.nameBook}">John Doe</td>
+        <td th:text="${book.authorsID}">John Doe</td>
+        <td>
+            <a th:href="@{/edit(id=${book.id})}" href="edit.html">Edit</a>
+        </td>
+        <td>
+            <a th:href="@{/delete(id=${book.id})}" href="delete.html">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+
+<form id="edit-form" th:action=@{/save} th:method="post" action="list.html">
+    <h1>Save new book:</h1>
+
+    <div class="row">
+        <label for="holder-input">Name book:</label>
+        <input id="holder-input" name="nameBook" type="text" th:value="${nameBook}" value="John Doe"/>
+    </div>
+
+    <div class="row">
+        <label for="authorsID-input">Name Author:</label>
+
+        <select id="authorsID-input" name="authorsID">
+            <option value="0">select Author</option>
+            <option th:each="author : ${authors}" th:value="${author.id}" th:text="${author.nameAuthor}">
+                John Doe
+            </option>
+        </select>
+    </div>
+
+
+
+
+    <div class="row">
+        <button type="submit">Save</button>
+    </div>
+</form>
+
+
+</body>
+</html>
