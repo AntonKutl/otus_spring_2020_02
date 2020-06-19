@@ -24,6 +24,10 @@
         <module>hw-07</module>
         <module>hw-08</module>
         <module>hw-09(spring-mvc-view)</module>
+        <module>hw-10(RESTful)</module>
+        <module>hw-11(WebFlux)</module>
+        <module>hw-12(SS-auth)</module>
+        <module>hw-13(Authorization)</module>
     </modules>
     <properties>
         <maven.compiler.target>11</maven.compiler.target>
