@@ -11,7 +11,6 @@ import javax.persistence.*;
 import java.util.List;
 
 @Data
-@Entity
 @NoArgsConstructor
 @Document(collection = "genres")
 public class GenreItem {

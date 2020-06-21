@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-@Entity
 @NoArgsConstructor
 @Document(collection = "authors")
 public class AuthorItem {

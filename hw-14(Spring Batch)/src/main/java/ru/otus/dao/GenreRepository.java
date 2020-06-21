@@ -4,5 +4,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import ru.otus.model.Genre;
 
 public interface GenreRepository extends JpaRepository<Genre, Long> {
-    Genre findByNameAuthor(String nameAuthor);
+    Genre findByNameGenre(String nameGenre);
 }
