@@ -8,6 +8,6 @@ import org.springframework.stereotype.Service;
 public class OrderErrorHandler  {
 
     public void handleFailedOrder(Message<MessageHandlingException> message) {
-        System.out.println(message.getPayload());
+        System.out.println("Ошибка:"+message.getPayload());
     }
 }
