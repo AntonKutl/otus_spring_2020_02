@@ -20,7 +20,6 @@ public class OrderServiceImpl implements OrderService {
         this.itemGateway = itemGateway;
     }
 
-
     @Override
     public void processOrder() throws IOException {
         List<OrderItem> list=new ArrayList<>();
@@ -29,6 +28,7 @@ public class OrderServiceImpl implements OrderService {
         System.out.println("Введите название товара");
         orderItem.setItemName(reader.readLine());
         list.add(orderItem);
+        list=null;
         List<Item> item=itemGateway.processOrder(list);
         System.out.println("Куплен товар: "+item);
     }

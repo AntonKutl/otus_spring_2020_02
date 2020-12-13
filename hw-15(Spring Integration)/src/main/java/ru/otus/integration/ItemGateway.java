@@ -7,7 +7,7 @@ import ru.otus.domain.OrderItem;
 
 import java.util.List;
 
-@MessagingGateway
+@MessagingGateway(errorChannel = "errorChannel")
 public interface ItemGateway {
 
     @Gateway(requestChannel = "ordersChannel", replyChannel = "goodsChannel")

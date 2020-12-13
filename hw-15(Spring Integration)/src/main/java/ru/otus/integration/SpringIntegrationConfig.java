@@ -2,12 +2,17 @@ package ru.otus.integration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.integration.annotation.Filter;
+import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.integration.dsl.IntegrationFlow;
 import org.springframework.integration.dsl.IntegrationFlows;
 import org.springframework.integration.dsl.MessageChannels;
 import org.springframework.integration.dsl.Pollers;
+import org.springframework.integration.handler.LoggingHandler;
 import org.springframework.integration.scheduling.PollerMetadata;
+import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
+import org.springframework.messaging.MessageHandler;
 
 @Configuration
 public class SpringIntegrationConfig {
@@ -36,4 +41,12 @@ public class SpringIntegrationConfig {
                 .channel("goodsChannel")
                 .get();
     }
+
+    @Bean
+    public IntegrationFlow errorFlow() {
+        return IntegrationFlows.from("errorChannel")
+                .handle("orderErrorHandler", "handleFailedOrder")
+                .get();
+    }
+
 }
