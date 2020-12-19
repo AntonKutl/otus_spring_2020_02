@@ -29,6 +29,7 @@
         <module>hw-12(SS-auth)</module>
         <module>hw-13(Authorization)</module>
         <module>hw-14(Spring Batch)</module>
+        <module>hw-16(Spring Boot Actuator)</module>
     </modules>
     <properties>
         <maven.compiler.target>11</maven.compiler.target>
