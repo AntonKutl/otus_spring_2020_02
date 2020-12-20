@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="keywords" th:content="${keywords}"/>
+    <title>List of all persons</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        .persons, .persons td {
+            border: 1px solid lightgray;
+            padding: 5px;
+        }
+    </style>
+    <script src="webjars/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+<h1>Persons:</h1>
+
+<table class="persons">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Delete</th>
+        <th>Edit</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+
+<h1>Save new book:</h1>
+<div id="dialog1" class="window">
+    <div class="row">
+        <label>Name book:</label>
+        <input id="name" name="nameBook" type="text"/>
+    </div>
+
+    <div class="row">
+        <label>Name Author:</label>
+
+        <select id="authorsID" name="authorsID">
+            <option value="0">select Author</option>
+        </select>
+    </div>
+    <div class="row">
+        <button id="create-user" type="submit">Save</button>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $.get('/api/books').done(function (books) {
+            books.forEach(function (book) {
+                $('tbody').append(`
+                    <tr>
+                        <td>${book.id}</td>
+                        <td>${book.nameBook}</td>
+                        <td><button id='delete' value=${book.id}>Delete</button></td>
+                        <td><button id='edit'value=${book.id}>Edit</button></td>
+                    </tr>
+                `)
+            });
+        });
+        $.get('/api/authors').done(function (authors) {
+              authors.forEach(function (author) {
+                  var author=author.nameAuthor
+                   $('#authorsID').append($(new Option(author, 1)))
+              });
+        })
+    });
+
+    $( "tbody" ).on('click','button',function() {
+       if ($(this).attr('id')=='delete'){
+       $.ajax({
+          url: '/api/books/'+ $(this).val(),
+          type: 'DELETE',
+       });
+       }else{
+       alert()
+       }
+       location.reload();
+    });
+
+    $( "#create-user" ).on( "click", function() {
+         var settings = { "url": "/api/book", "method": "POST", "timeout": 0,
+         "headers": {"Content-Type": "application/json"},
+           "data": JSON.stringify({"nameBook": $("#name").val(),"authorsID":$("#authorsID").val(),"comments":[]}),
+         };
+
+         $.ajax(settings).done(function (response) {
+            console.log(response);
+         });
+           location.reload();
+    })
+
+</script>
+</body>
+</html>
