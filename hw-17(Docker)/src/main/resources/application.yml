@@ -1,0 +1,21 @@
+
+spring:
+  datasource:
+    initialization-mode: always
+    schema:
+           classpath: /schema.sql
+    data:
+           classpath: /data.sql
+
+
+  banner:
+    charset: UTF-8
+    location: classpath:banner.txt
+
+
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+
