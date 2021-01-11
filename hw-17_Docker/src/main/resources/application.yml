@@ -1,11 +1,10 @@
-
 spring:
   datasource:
     initialization-mode: always
-    schema:
-           classpath: /schema.sql
-    data:
-           classpath: /data.sql
+    driver-class-name: ${DB_DRIVER}
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
 
 
   banner:
@@ -18,4 +17,3 @@ spring:
     hibernate:
       ddl-auto: none
     show-sql: true
-
