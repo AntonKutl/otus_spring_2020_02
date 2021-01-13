@@ -34,7 +34,7 @@ public class BookController {
         return authorRepository.findAll();
     }
 
-    @DeleteMapping("/api/books/{id}")
+    @DeleteMapping ("/api/books/{id}")
     public void delete(@PathVariable(name = "id") long id){
         bookRepository.deleteById(id);
     }

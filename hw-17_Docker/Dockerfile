@@ -4,6 +4,7 @@ ENV PROJECT_DIR=/opt/project
 RUN mkdir -p $PROJECT_DIR
 WORKDIR $PROJECT_DIR
 
+
 ADD ./pom.xml $PROJECT_DIR
 RUN mvn dependency:resolve
 

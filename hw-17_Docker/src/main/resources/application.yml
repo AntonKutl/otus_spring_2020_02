@@ -1,19 +1,33 @@
 spring:
   datasource:
-    initialization-mode: always
     driver-class-name: ${DB_DRIVER}
     url: ${DB_URL}
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
 
-
-  banner:
-    charset: UTF-8
-    location: classpath:banner.txt
-
-
   jpa:
     generate-ddl: false
     hibernate:
-      ddl-auto: none
+      dda-auto: none
     show-sql: true
+
+  liquibase:
+    enabled: true
+
+logging:
+  file:
+    name: actuator.log
+  level:
+    root: INFO
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health, info"
+  endpoint:
+    health:
+      show-details: always
+  health:
+    defaults:
+      enabled: true
