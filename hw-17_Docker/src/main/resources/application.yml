@@ -1,5 +1,6 @@
 spring:
   datasource:
+    initialization-mode: always
     driver-class-name: ${DB_DRIVER}
     url: ${DB_URL}
     username: ${DB_USERNAME}
@@ -8,26 +9,24 @@ spring:
   jpa:
     generate-ddl: false
     hibernate:
-      dda-auto: none
+      ddl-auto: none
+      #ddl-auto: create-drop
+
     show-sql: true
-
-  liquibase:
-    enabled: true
-
-logging:
-  file:
-    name: actuator.log
-  level:
-    root: INFO
 
 management:
   endpoints:
     web:
       exposure:
-        include: "health, info"
+        include: "health, metrics, logfile"
   endpoint:
     health:
       show-details: always
-  health:
-    defaults:
-      enabled: true
+
+logging:
+  pattern:
+    rolling-file-name: "${LOG_FILE}.%d{yyyy-MM-dd_HH-mm}.%i.gz"
+  file:
+    name: "logs/service.log"
+    max-size: 1024B
+    max-history: 3
