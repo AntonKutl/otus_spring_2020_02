@@ -20,5 +20,4 @@ COPY --from=0 $PROJECT_DIR/target/library* $PROJECT_DIR/
 
 EXPOSE 8080
 
-
 ENTRYPOINT ["java", "-jar", "/opt/project/library.jar"]
